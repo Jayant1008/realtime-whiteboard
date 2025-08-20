@@ -117,11 +117,22 @@ function eraserSize(value) {
     strokeWidthEraser.value = value;
 }
 
+//clearing the canvas
+function clearCanvas() {
+  canvas.clearRect(0, 0, board.width, board.height);  
+  canvas.fillStyle = "white";
+  canvas.fillRect(0, 0, board.width, board.height);
+  undoStack = [];
+  redoStack = [];
+  socket.emit("clearcanvas");
+}
+
 
 //for downloading the canvas
 const downld = document.querySelector("#download");
-downld.addEventListener("click", function(e) {
-  
+downld.addEventListener("click", function(e) { 
+  // canvas.fillStyle = "white";
+  // canvas.fillRect(0, 0, board.width, board.height);
   const a=document.createElement("a");
   a.download="file.png";
   a.href=board.toDataURL("image/png");
@@ -153,6 +164,7 @@ function createPad(){
   close.addEventListener("click", function() {
     stickyPad.remove();
   });
+  close.addEventListener("touchstart", () => stickyPad.remove(), { passive: true });
 
   let isMinimized = false;
   minimize.addEventListener("click", function() {
@@ -160,6 +172,11 @@ function createPad(){
     else writingPad.style.display = "block"
     isMinimized = !isMinimized;
   });
+  minimize.addEventListener("touchstart", () => {
+  if (!isMinimized) writingPad.style.display = "none";
+  else writingPad.style.display = "block";
+  isMinimized = !isMinimized;
+}, { passive: true });
   let initX = null;
   let initY = null;
   let isStickyHeld = false;
@@ -193,6 +210,36 @@ function createPad(){
   navBar.addEventListener("mouseleave", function() {
     isStickyHeld = false;
   });
+  navBar.addEventListener("touchstart", function (e) {
+  e.preventDefault(); // stop scrolling
+  let touch = e.touches[0];
+  initX = touch.clientX;
+  initY = touch.clientY;
+  isStickyHeld = true;
+}, { passive: false });
+
+navBar.addEventListener("touchmove", function (e) {
+  e.preventDefault();
+  let touch = e.touches[0];
+  if (isStickyHeld == true) {
+      let finalX = touch.clientX;
+      let finalY = touch.clientY;
+
+      let diffX = finalX - initX;
+      let diffY = finalY - initY;
+
+      let { top, left } = stickyPad.getBoundingClientRect();
+      stickyPad.style.top = top + diffY + "px";
+      stickyPad.style.left = left + diffX + "px";
+      // updating previous point with current point
+      initX = finalX;
+      initY = finalY;
+    }
+}, { passive: false });
+
+navBar.addEventListener("touchend", function () {
+  isStickyHeld = false;
+});
 
   console.log("Sticky clicked");
   document.body.appendChild(stickyPad);

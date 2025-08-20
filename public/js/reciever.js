@@ -34,3 +34,6 @@ socket.on("onundo", function() {
 socket.on("onredo", function() {
   redoMaker();
 });
+socket.on("onclearcanvas", function () {
+    clearCanvas();
+});

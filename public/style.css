@@ -33,9 +33,10 @@ body {
     padding:3px;
     height: 40px;
     width: 40px;
+    cursor: pointer;
 }
 @media (max-width: 420px){
-  .tool-img{ height: 32px; width: 32px; }
+  .tool-img{ height: 28px; width: 28px; }
   .panel{ gap: 12px; }
 }
 .tool {

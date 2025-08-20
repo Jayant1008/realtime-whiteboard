@@ -40,6 +40,9 @@ io.on("connection", function(socket) {
   socket.on("redo", function() {
     socket.broadcast.emit("onredo");
   });
+  socket.on("clearcanvas", function() {
+    socket.broadcast.emit("onclearcanvas");
+  });
 });
 // nodejs server
 const port = process.env.PORT || 3000;

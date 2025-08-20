@@ -6,8 +6,14 @@ board.addEventListener("mousedown", function(e) {
     let top = toolbar.getBoundingClientRect().height;
     canvas.beginPath();
     canvas.moveTo(e.clientX, e.clientY - top + window.scrollY);
-    pencilPanel.classList.remove("show");
+    if(currTool === "pencil" ){
+     pencilPanel.classList.remove("show");
     pencilPanel.style.display = "none";
+    }
+    if(currTool === "eraser"){
+      eraserPanel.classList.remove("show");
+      eraserPanel.style.display = "none";
+    }
     let point = {
         x: e.clientX,
         y: e.clientY - top,
@@ -45,6 +51,15 @@ board.addEventListener("touchstart", function(e) {
     e.preventDefault(); // stop page scrolling
     isDrawing = true;
     let touch = e.touches[0]; // first finger
+    if(currTool === "pencil" ){
+     pencilPanel.classList.remove("show");
+    pencilPanel.style.display = "none";
+    }
+    if(currTool === "eraser"){
+      eraserPanel.classList.remove("show");
+      eraserPanel.style.display = "none";
+    }
+   
     let top = toolbar.getBoundingClientRect().height;
     canvas.beginPath();
     canvas.moveTo(touch.clientX, touch.clientY - top);
