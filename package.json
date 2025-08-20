@@ -1,0 +1,12 @@
+  {
+  "name": "realtime-whiteboard",
+  "version": "1.0.0",
+  "main": "express.js",
+  "scripts": {
+    "start": "node express.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  }
+}

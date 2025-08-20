@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="toolbar">
+        <!-- <div class="cross">Hamburger</div> -->
+        <div class="panel">
+            <div class="tool" id="pencil">
+                <img src="./images/pencil copy.png" class="tool-img" alt="" onclick="handleToolChange('pencil')">
+            </div>
+            <div class="tool" id="eraser">
+                <img src="./images/eraser'.png" class="tool-img" alt="" onclick="handleToolChange('eraser')">
+            </div>
+            <div class="tool" id="sticky">
+                <img src="./images/sticky.png" class="tool-img" alt="" onclick="handleToolChange('sticky')">
+            </div>
+            <div class="tool" id="upload">
+                
+                <img src="./images/upload.png" alt="" class="tool-img upload-img">
+            </div>
+            <div class="tool" id="download">
+                <img src="./images/down.png" alt="" class="tool-img">
+            </div>
+            <div class="tool" id="undo">
+                <img src="./images/undo.png" alt="" class="tool-img">
+            </div>
+            <div class="tool" id="redo">
+                <img src="./images/redo.png" alt="" class="tool-img">
+            </div>
+        </div>
+        <input type="file" class="input-img" style="display: none;" accept="image/*">
+    </div>
+
+    <canvas id="whiteboard"></canvas>
+
+    <div class="style-panel" id="pencil-style-panel">
+    <div class="section">
+        <p>Stroke</p>
+        <div class="stroke-colors">
+            <div class="color black " onclick="colorChange('black')"></div>
+            <div class="color red " onclick="colorChange('red')"></div>
+            <div class="color green" onclick="colorChange('green')"></div>
+            <div class="color blue" onclick="colorChange('blue')"></div>
+            <div class="color orange" onclick="colorChange('orange')"></div>
+            <div class="color purple" onclick="colorChange('purple')"></div>
+            <div class="color pink" onclick="colorChange('pink')"></div>
+            <div class="color brown" onclick="colorChange('brown')"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <p>Stroke width</p>
+        <input type="range" min="1" max="20" value="5" id="stroke-width-slider-pencil" onchange="penSizeChange(this.value)">
+    </div>
+</div>
+</div>
+     <div class="style-panel" id="eraser-style-panel">
+        <div class="section">
+        <p>Stroke width</p>
+        <input type="range" min="1" max="20" value="5" id="stroke-width-slider-eraser" onchange="sizeChange(this.value)">
+    </div>
+     </div>
+
+    <script src="./js/script.js"></script>
+    <script src="./js/draw.js"></script>
+    <script src="./js/stickynupload.js"></script>
+    <script src="./js/undoredo.js"></script>
+   <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/reciever.js"></script>
+
+</body>
+
+</html>
