@@ -33,6 +33,20 @@ undo.addEventListener("mouseup", function () {
 undo.addEventListener("mouseleave", function () {
   clearInterval(interval);
 });
+//for phone
+undo.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  interval = setInterval(function() {
+    if (undoMaker()) socket.emit("undo");
+  }, 50);
+}, { passive: false });
+
+undo.addEventListener("touchend", function() {
+  clearInterval(interval);
+});
+undo.addEventListener("touchcancel", function() {
+  clearInterval(interval);
+});
 
 redo.addEventListener("mousedown", function() {
   interval = setInterval(function() {
@@ -45,5 +59,20 @@ redo.addEventListener("mouseup", function () {
 });
 
 redo.addEventListener("mouseleave", function () {
+  clearInterval(interval);
+});
+
+//for phone
+redo.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  interval = setInterval(function() {
+    if (redoMaker()) socket.emit("redo");
+  }, 50);
+}, { passive: false });
+
+redo.addEventListener("touchend", function() {
+  clearInterval(interval);
+});
+redo.addEventListener("touchcancel", function() {
   clearInterval(interval);
 });

@@ -41,7 +41,49 @@ board.addEventListener("mouseup", function() {
     isDrawing = false;
 });
 
+board.addEventListener("touchstart", function(e) {
+    e.preventDefault(); // stop page scrolling
+    isDrawing = true;
+    let touch = e.touches[0]; // first finger
+    let top = toolbar.getBoundingClientRect().height;
+    canvas.beginPath();
+    canvas.moveTo(touch.clientX, touch.clientY - top);
 
+    let point = {
+        x: touch.clientX,
+        y: touch.clientY - top,
+        identifier: "mousedown",
+        color: canvas.strokeStyle,
+        width: canvas.lineWidth
+    };
+
+    undoStack.push(point);
+    socket.emit("mousedown", point);
+}, { passive: false });
+
+board.addEventListener("touchmove", function(e) {
+    e.preventDefault();
+    if (isDrawing) {
+        let touch = e.touches[0];
+        let top = toolbar.getBoundingClientRect().height;
+        canvas.lineTo(touch.clientX, touch.clientY - top);
+        canvas.stroke();
+
+        let point = {
+            x: touch.clientX,
+            y: touch.clientY - top,
+            identifier: "mousemove",
+            color: canvas.strokeStyle,
+            width: canvas.lineWidth
+        };
+        undoStack.push(point);
+        socket.emit("mousemove", point);
+    }
+}, { passive: false });
+
+board.addEventListener("touchend", function() {
+    isDrawing = false;
+});
 
 function redraw() {
   canvas.clearRect(0, 0, board.width, board.height);

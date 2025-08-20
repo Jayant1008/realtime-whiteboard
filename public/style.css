@@ -34,6 +34,10 @@ body {
     height: 40px;
     width: 40px;
 }
+@media (max-width: 420px){
+  .tool-img{ height: 32px; width: 32px; }
+  .panel{ gap: 12px; }
+}
 .tool {
     margin-left:5px;
     border-radius: 15px;
