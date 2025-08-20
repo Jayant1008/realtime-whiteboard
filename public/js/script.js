@@ -118,13 +118,13 @@ function eraserSize(value) {
 }
 
 //clearing the canvas
-function clearCanvas() {
+function clearCanvas(isReceiver = false) {
   canvas.clearRect(0, 0, board.width, board.height);  
   canvas.fillStyle = "white";
   canvas.fillRect(0, 0, board.width, board.height);
   undoStack = [];
   redoStack = [];
-  socket.emit("clearcanvas");
+  if(isReceiver) socket.emit("clearcanvas");
 }
 
 
