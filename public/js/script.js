@@ -124,7 +124,7 @@ function clearCanvas(isReceiver = false) {
   canvas.fillRect(0, 0, board.width, board.height);
   undoStack = [];
   redoStack = [];
-  if(isReceiver) socket.emit("clearcanvas");
+  if(!isReceiver) socket.emit("clearcanvas");
 }
 
 
