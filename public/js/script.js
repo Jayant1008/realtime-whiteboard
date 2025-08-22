@@ -88,22 +88,32 @@ function penSize(value) {
     strokeWidthPencil.value = value;
 }
 
+
+const colorMap = {
+    black: "black",
+    red: "#e74c3c",
+    green: "#2ecc71",
+    blue: "#3498db",
+    orange: "#e67e22",
+    purple: "#9b59b6",
+    pink: "#fd79a8",
+    brown: "#8b5e3c"
+};
 function colorChange(color){
   colorChanger(color);
   socket.emit("color", color);
 }
 //function for setting the pencil color
-function colorChanger(color) {
-  currColor = color; 
-  canvas.strokeStyle = color;
-  const colors = document.querySelectorAll(".stroke-colors .color");
+function colorChanger(colorKey) {
+    currColor = colorMap[colorKey];
+    canvas.strokeStyle = currColor;
 
+    const colors = document.querySelectorAll(".stroke-colors .color");
     colors.forEach(c => c.classList.remove("active"));
-    const activeColor = document.querySelector(`.stroke-colors .${color}`);
+    const activeColor = document.querySelector(`.stroke-colors .${colorKey}`);
     if (activeColor) {
         activeColor.classList.add("active");
     }
-  
 }
 //setting the eraser width
 function sizeChange(value) {
