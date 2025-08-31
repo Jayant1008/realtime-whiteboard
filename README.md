@@ -52,8 +52,10 @@ git clone https://github.com/your-username/realtime-whiteboard.git
 cd realtime-whiteboard
 npm install
 node express.js
-http://localhost:3000
 ```
+Open browser and visit
+http://localhost:3000
+
 🔗 Links
 
 GitHub Repo: https://github.com/Jayant1008/realtime-whiteboard
