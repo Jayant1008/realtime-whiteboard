@@ -39,7 +39,6 @@ function handleTool(tool) {
   allTools.forEach(t => t.classList.remove("active"));
 
   if (tool === 'pencil') {
-    // if (currTool !== "pencil") {   // prevent repeated toggles
       currTool = "pencil";
       pencilTool.classList.add("active");
       console.log("pencil clicked");
@@ -50,12 +49,9 @@ function handleTool(tool) {
       pencilPanel.style.left = `${rect.left}px`;
       pencilPanel.style.display = "block";
       requestAnimationFrame(() => pencilPanel.classList.add("show"));
-
       eraserPanel.classList.remove("show");
       eraserPanel.style.display = "none";
-    // }
   } else if (tool === "eraser") {
-    // if (currTool !== "eraser") {
       currTool = "eraser";
       canvas.strokeStyle = "white";
       canvas.lineWidth = currEraserWidth;
@@ -69,13 +65,10 @@ function handleTool(tool) {
 
       pencilPanel.classList.remove("show");
       pencilPanel.style.display = "none";
-    // }
   } else if (tool === "sticky") {
     createSticky();
   }
 }
-
-
 
 function penSizeChange(value){
   penSize(value);
@@ -87,8 +80,6 @@ function penSize(value) {
     currWidth = value;
     strokeWidthPencil.value = value;
 }
-
-
 const colorMap = {
     black: "black",
     red: "#e74c3c",
@@ -251,7 +242,6 @@ navBar.addEventListener("touchend", function () {
   isStickyHeld = false;
 });
 
-  console.log("Sticky clicked");
   document.body.appendChild(stickyPad);
   return writingPad;
 }

@@ -43,7 +43,14 @@ io.on("connection", function(socket) {
   socket.on("clearcanvas", function() {
     socket.broadcast.emit("onclearcanvas");
   });
+  socket.on("text", function(text) {
+    socket.broadcast.emit("ontext", text);
+  });
+  socket.on("imgUpload",function(imgData){
+    socket.broadcast.emit("onImgUpload", imgData);
+  });
 });
+
 // nodejs server
 const port = process.env.PORT || 3000;
 server.listen(port, function(req, res) {

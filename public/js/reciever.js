@@ -37,3 +37,13 @@ socket.on("onredo", function() {
 socket.on("onclearcanvas", function () {
     clearCanvas(true);
 });
+socket.on("ontext",function(text){
+    updatePad(text);
+})
+socket.on("onImgUpload", function(base64) {
+  const writingPad = createPad();
+  const img = document.createElement("img");
+  img.src = base64;
+  img.className = "uploadedImgStyle";
+  writingPad.appendChild(img);
+});
