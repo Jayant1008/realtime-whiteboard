@@ -9,29 +9,23 @@ function createSticky(){
 }
 function updatePad(text){
   var textarea = document.querySelector("textarea.writing-pad");
-  // console.log("pad is updating")
-  textarea.value+=text;
+  console.log(text)
+  if(text==='Backspace'){
+    textarea.value = textarea.value.slice(0, -1);
+    return;
+  }
+  if(text==='Enter'){
+    textarea.value += "\n";
+    return;
+  }
+  if(text.length === 1){
+    textarea.value+=text;
+  }
 }
 
 
 const uploadImg = document.querySelector(".upload-img");
 const FileInput = document.querySelector(".input-img");
-// uploadImg.addEventListener("click", function(e) {
-//   e.preventDefault();
-//   FileInput.click();
-//   FileInput.addEventListener("change", function(e) {
-//     const writingPad = createPad();
-//     const img = document.createElement("img");
-//     let src = URL.createObjectURL(e.target.files[0]);
-//     socket.emit("imgUpload",src);
-//     img.src = src;
-//     img.setAttribute("class", "uploadedImgStyle");
-//     writingPad.appendChild(img);
-//     img.onload = function() {
-//       URL.revokeObjectURL(img.src);
-//     };
-//   });
-// });
 
 uploadImg.addEventListener("click", function(e) {
   e.preventDefault();
@@ -39,7 +33,6 @@ uploadImg.addEventListener("click", function(e) {
 });
 
 FileInput.addEventListener("change", function(e) {
-
   const file = e.target.files[0];
   if (!file) return;
 
